@@ -56,4 +56,3 @@ def admin_add_certificate(request: AddCertificateRequestModel):
         "certificate": certificate,
     }
 
- 

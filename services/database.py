@@ -49,3 +49,35 @@ def add_certificate(request: AddCertificateRequestModel) -> dict:
 		raise ValueError("Failed to insert certificate record")
 
 	return response.data[0]
+
+
+def get_certificate_by_certificate_id(certificate_id: str) -> dict:
+	client = get_supabase_client()
+	response = (
+		client.table("certificates")
+		.select("*")
+		.eq("certificate_id", certificate_id)
+		.limit(1)
+		.execute()
+	)
+
+	if not response.data:
+		raise ValueError("Certificate not found")
+
+	return response.data[0]
+
+
+def get_template_by_id(template_id: int) -> dict:
+	client = get_supabase_client()
+	response = (
+		client.table("templates")
+		.select("*")
+		.eq("id", template_id)
+		.limit(1)
+		.execute()
+	)
+
+	if not response.data:
+		raise ValueError("Template not found")
+
+	return response.data[0]
